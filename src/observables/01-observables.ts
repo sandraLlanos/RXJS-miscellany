@@ -23,7 +23,7 @@ const obs$ = new Observable<string>( subscriber => {
     subscriber.next('mundo');
     
 
-// para forzar el error
+/**para forzar el error **/
     // const a = undefined;
     // a.nombre = 'sandra';
 
@@ -35,18 +35,22 @@ const obs$ = new Observable<string>( subscriber => {
 
 obs$.subscribe( observer );
 
-//es igual que solo llammar el console.log
+/**
+ * obs$.subscribe( console.log )
+ es igual que hacer el subscribe de esta forma
+**/
 // obs$.subscribe( respuesta => 
 //     {console.log(respuesta);
 // }) 
 // respuesta en este caso lo que hace es procesar el next del subscriber
 
-// obs$.subscribe( console.log )
 
-// Existen 3 posibles argumentos (funciones) que se le pueden enviar a un subscribe
-// next
-// error
-// complete
+/**
+ * Existen 3 posibles argumentos (funciones) que se le pueden enviar a un subscribe
+next
+error
+complete
+**/
 // obs$.subscribe( 
 //     valor => console.log('next: ', valor),
 //     error => console.error('error', error),
