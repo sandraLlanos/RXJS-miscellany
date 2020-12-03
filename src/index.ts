@@ -1,34 +1,16 @@
-import { Observable, Observer } from 'rxjs';  // cuando el objeto se extrae directamente del rxjs
-                                    //significa que es para crear Observable 
+import { fromEvent } from "rxjs";
+import { debounceTime } from "rxjs/operators";
 
-const observer:Observer<any> = {
-    next : valor => console.log('next: ', valor),
-    error : error => console.error('error:', error),
-    complete : () => console.info('completado:') 
-}
 
-const interval$ = new Observable<number>( subsriber => {
-    let count = 0;
-    const interval = setInterval( ()=> {
-        count ++;
-        subsriber.next(count);
-        console.log(count);        
-    }, 1000);
-    return () => {
-        clearInterval(interval);
-        console.log('intervalo destruido');        
-    }
-});
+const body = document.querySelector('body');
+const textInput = document.createElement('input');
+body.append(textInput);
 
-const subcription2 = interval$.subscribe( )
-const subcription1 = interval$.subscribe( )
-const subcription3 = interval$.subscribe( )
+const input$ = fromEvent(textInput, 'keyup');
 
-setTimeout(()=>{
-    subcription1.unsubscribe(); //cancela la subscripción, pero no destruye el intervalo
-    subcription2.unsubscribe();
-    subcription3.unsubscribe();
-    console.log('completado');
-    
-}, 3000)
+input$.pipe(
+debounceTime(500),
+
+)
+.subscribe( resp => console.log('respuesta del subscribe', resp));
 
